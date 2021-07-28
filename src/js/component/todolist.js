@@ -19,7 +19,7 @@ export function TodoList() {
 
 	const deleteTodo = event => {
 		let newArr = [...todolist];
-		delete newArr[event.target.value];
+		newArr.splice(event.target.value, 1);
 		setUserInput("");
 		setTodolist(newArr);
 	};
