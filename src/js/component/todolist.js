@@ -2,11 +2,7 @@ import React, { useState } from "react";
 
 export function TodoList() {
 	let [userInput, setUserInput] = useState("");
-	let [todolist, setTodolist] = useState([
-		"Wash hands",
-		"Make your bed",
-		"Practice piano"
-	]);
+	let [todolist, setTodolist] = useState([]);
 
 	// React.useEffect(() => {
 	// 	console.log("An item was add: ", userInput);
@@ -28,6 +24,23 @@ export function TodoList() {
 		setTodolist(newArr);
 	};
 
+	React.useEffect(() => {
+		const getList = fetch(
+			"https://assets.breatheco.de/apis/fake/todos/user/leocuba88",
+			{
+				method: "GET"
+			}
+		);
+		getList
+			.then(resp => {
+				return resp.json();
+			})
+			.then(data => {
+				const newTodos = data.map(x => x.label);
+				setTodolist(newTodos);
+			});
+	}, []);
+
 	return (
 		<div className="body">
 			<h1>todos</h1>
@@ -43,8 +56,8 @@ export function TodoList() {
 				<ul>
 					{todolist.map((task, i) => {
 						return (
-							<div className="buttonAppear">
-								<li className="item" key={i}>
+							<div key={i} className="buttonAppear">
+								<li className="item">
 									{task}{" "}
 									<button value={i} onClick={deleteTodo}>
 										X
