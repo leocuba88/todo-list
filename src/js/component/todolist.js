@@ -19,7 +19,7 @@ export function TodoList() {
 
 	const deleteTodo = event => {
 		let newArr = [...todolist];
-		newArr.splice(event.target.value, 1);
+		newArr.splice(event.target.value, 1); //the one means 1 item
 		setUserInput("");
 		setTodolist(newArr);
 	};
@@ -60,7 +60,7 @@ export function TodoList() {
 								<li className="item">
 									{task}{" "}
 									<button value={i} onClick={deleteTodo}>
-										X
+										<i className="far fa-trash-alt" />
 									</button>
 								</li>
 							</div>
